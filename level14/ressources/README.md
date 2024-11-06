@@ -10,12 +10,24 @@ But it is implemented in 2 part, a call and then a if comparison, so it's exploi
 
 We did exactly the same as the previous one :
 ```
-gdb getflag
-b *0x804898e (ptrace bypass)
-b *0x8048b0a (uid bypass)
-run
-set $eax=1 (Since the condition is eax < 0)
-continue
-set $eax=3014 (UID of flag14 user)
-continue
+level14@SnowCrash:~$ gdb getflag
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Reading symbols from /bin/getflag...(no debugging symbols found)...done.
+(gdb) b 0x804898e
+Breakpoint 1 at 0x804898e
+(gdb) b0x8048b0a
+Breakpoint 2 at 0x8048b0a
+(gdb) run
+Starting program: /bin/getflag 
+
+Breakpoint 1, 0x0804898e in main ()
+(gdb) set $eax=1
+(gdb) continue
+Continuing.
+
+Breakpoint 2, 0x08048b0a in main ()
+(gdb) set $eax=3014
+(gdb) continue
+Continuing.
+Check flag.Here is your token : xxxxxxxxxxxxxxxx
 ```
